@@ -9,8 +9,8 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
     using System.Data;
     using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Text;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Azure.Cosmos.Table;
     using Microsoft.Extensions.Localization;
