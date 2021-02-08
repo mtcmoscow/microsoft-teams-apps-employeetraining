@@ -480,7 +480,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
 
             MemoryStream stream = new MemoryStream();
 
-            StreamWriter writer = new StreamWriter(stream, new System.Text.UTF8Encoding(true));
+            StreamWriter writer = new StreamWriter(stream, new System.Text.UTF8Encoding(false));
             writer.Write(string.Join(",", csvColumns.Select(column => $"\"{column}\"").ToArray()));
             writer.WriteLine();
 
