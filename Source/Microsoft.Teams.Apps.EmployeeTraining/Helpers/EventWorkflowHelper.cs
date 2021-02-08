@@ -557,13 +557,14 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
             var data = Encoding.UTF8.GetBytes(writer.ToString());
             var result = Encoding.UTF8.GetPreamble().Concat(data).ToArray();
 
-            MemoryStream stream = new MemoryStream();
-            StreamWriter w = new StreamWriter(stream);
-            w.Write(result);
-            w.Flush();
-            stream.Position = 0;
-
-            return stream;
+            using (MemoryStream stream = new MemoryStream())
+            using (StreamWriter w = new StreamWriter(stream))
+            {
+                w.Write(result);
+                w.Flush();
+                stream.Position = 0;
+                return stream;
+            }
         }
 
         /// <summary>
