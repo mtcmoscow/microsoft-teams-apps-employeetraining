@@ -558,7 +558,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
             var result = Encoding.UTF8.GetPreamble().Concat(data).ToArray();
 
             MemoryStream stream = new MemoryStream();
-            using (StreamWriter w = new StreamWriter(stream))
+            StreamWriter w = new StreamWriter(stream);
             {
                 w.Write(result);
                 w.Flush();
