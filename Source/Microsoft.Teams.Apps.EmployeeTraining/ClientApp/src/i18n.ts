@@ -5,6 +5,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import Backend from 'i18next-xhr-backend';
+import moment from 'moment';
+import 'moment/min/locales.min';
 import * as microsoftTeams from "@microsoft/teams-js";
 
 let locale = "en-US";
@@ -27,5 +29,10 @@ i18n
         useSuspense: true
     }
 });
+
+export const formatDate = (date: string) => {
+    if (!date) return date;
+    return moment(date).format('l LT');
+}
 
 export default i18n;
