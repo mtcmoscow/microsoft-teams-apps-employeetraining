@@ -7,7 +7,7 @@ import moment from "moment";
 import { Flex } from '@fluentui/react-northstar';
 import { useState } from "react";
 import { DatePicker } from 'office-ui-fabric-react/lib/DatePicker';
-import { Fabric, Customizer } from 'office-ui-fabric-react/lib';
+import { Fabric, Customizer, IDatePickerStrings } from 'office-ui-fabric-react';
 import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 import { DarkCustomizations } from "../../../helpers/dark-customizations";
 import { DefaultCustomizations } from "../../../helpers/default-customizations";
@@ -24,6 +24,38 @@ interface IDateePickerProps {
     minDate: Date;
     disableSelectionForPastDate:boolean
 }
+
+const DayPickerStrings: IDatePickerStrings = {
+    months: [
+      'Январь',
+      'Февраль',
+      'Март',
+      'Апрель',
+      'Май',
+      'Июнь',
+      'Июль',
+      'Август',
+      'Сентябрь',
+      'Октябрь',
+      'Ноябрь',
+      'Декабрь',
+    ],
+  
+    shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  
+    days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+  
+    shortDays: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+  
+    goToToday: 'Сегодня',
+    prevMonthAriaLabel: 'Предыдущий месяц',
+    nextMonthAriaLabel: 'Следующий месяц',
+    prevYearAriaLabel: 'Предыдущий год',
+    nextYearAriaLabel: 'Следующий год',
+    closeButtonAriaLabel: 'Закрыть',
+    monthPickerHeaderAriaLabel: '{0}, выберите для смены года',
+    yearPickerHeaderAriaLabel: '{0}, выберите для смены месяца',
+  };
 
 const StartDate: React.FC<IDateePickerProps> = props => {
     let bgcolor = "";
@@ -76,6 +108,7 @@ const StartDate: React.FC<IDateePickerProps> = props => {
                             <DatePicker
                                 className={bgcolor}
                                 label={''}
+                                strings={DayPickerStrings}
                                 showMonthPickerAsOverlay={true}
                                 minDate={minDate!}
                                 isMonthPickerVisible={true}

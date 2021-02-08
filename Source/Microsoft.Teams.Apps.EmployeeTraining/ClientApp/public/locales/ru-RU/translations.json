@@ -1,4 +1,6 @@
 {
+    "hour": "Часы",
+    "minute": "Минуты",
     "categoryName": "Категория",
     "enterNamePlaceholder": "Укажите название",
     "description": "Описание",
