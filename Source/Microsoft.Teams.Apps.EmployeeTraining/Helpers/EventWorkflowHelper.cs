@@ -454,7 +454,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
         /// <param name="teamId">The LnD team Id</param>
         /// <param name="eventId">The event Id of which details needs to be exported</param>
         /// <returns>Returns CSV data in stream</returns>
-        public async Task<Stream> ExportEventDetailsToCSVAsync(string teamId, string eventId)
+        public async Task<byte[]> ExportEventDetailsToCSVAsync(string teamId, string eventId)
         {
             var eventDetails = await this.eventRepository.GetEventDetailsAsync(eventId, teamId);
 
@@ -557,14 +557,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
             var data = Encoding.UTF8.GetBytes(writer.ToString());
             var result = Encoding.UTF8.GetPreamble().Concat(data).ToArray();
 
-            MemoryStream stream = new MemoryStream();
-            StreamWriter w = new StreamWriter(stream);
-            {
-                w.Write(result);
-                w.Flush();
-                stream.Position = 0;
-                return stream;
-            }
+            return result;
         }
 
         /// <summary>
