@@ -111,7 +111,7 @@ const EventCard: React.FunctionComponent<IEventCardProps> = props => {
                 <Flex vAlign="center" gap="gap.medium">
                     <Flex className="event-day" column vAlign="center" hAlign="center" fill>
                         <Text content={moment.utc(props.eventDetails.startDate).format("DD")} size="large" weight="bold" />
-                        <Text content={moment.utc(props.eventDetails.startDate).local().format("MMM")} size="medium" weight="semibold" />
+                        <Text content={moment.utc(props.eventDetails.startDate).format("MMM")} size="medium" weight="semibold" />
                     </Flex>
                     <Flex className="event-details" column vAlign="center" fill>
                         <Text className="event-category" truncated content={props.eventDetails.categoryName} weight="bold" size="smaller" />
