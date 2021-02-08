@@ -10,6 +10,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Text;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Azure.Cosmos.Table;
     using Microsoft.Extensions.Localization;
@@ -478,11 +479,10 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                 this.localizer.GetString("RegisteredUsers"),
             };
 
-            MemoryStream stream = new MemoryStream();
+            StringBuilder writer = new StringBuilder();
 
-            StreamWriter writer = new StreamWriter(stream, new System.Text.UTF8Encoding(false));
-            writer.Write(string.Join(",", csvColumns.Select(column => $"\"{column}\"").ToArray()));
-            writer.WriteLine();
+            writer.Append(string.Join(",", csvColumns.Select(column => $"\"{column}\"").ToArray()));
+            writer.AppendLine();
 
             var csvRows = new List<List<object>>();
 
@@ -512,8 +512,8 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                     attendees.First(),
                 });
 
-                writer.Write(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
-                writer.WriteLine();
+                writer.Append(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
+                writer.AppendLine();
 
                 for (int i = 1; i < attendees.Count; i++)
                 {
@@ -531,8 +531,8 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                         attendees[i],
                     });
 
-                    writer.Write(string.Join(",", csvRows[i].Select(cellValue => $"\"{cellValue}\"")));
-                    writer.WriteLine();
+                    writer.Append(string.Join(",", csvRows[i].Select(cellValue => $"\"{cellValue}\"")));
+                    writer.AppendLine();
                 }
             }
             else
@@ -551,10 +551,16 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                     string.Empty,
                 });
 
-                writer.Write(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
+                writer.Append(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
             }
 
-            writer.Flush();
+            var data = Encoding.UTF8.GetBytes(writer.ToString());
+            var result = Encoding.UTF8.GetPreamble().Concat(data).ToArray();
+
+            MemoryStream stream = new MemoryStream();
+            StreamWriter w = new StreamWriter(stream);
+            w.Write(result);
+            w.Flush();
             stream.Position = 0;
 
             return stream;
