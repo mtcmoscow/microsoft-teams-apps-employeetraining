@@ -171,12 +171,7 @@ class DiscoverEvents extends React.Component<IDiscoverEventsProps, IDiscoverEven
         let result: Array<IEvent> = [];
 
         if (response && response.status === ResponseStatus.OK && response.data?.length > 0) {
-            response.data.forEach(e=>{
-                e.startDate = formatDate(e.startDate);
-                e.endDate = formatDate(e.endDate);
-                e.createdOn = formatDate(e.createdOn);
-                e.updatedOn = formatDate(e.updatedOn);
-            });
+            
             result = response.data;
         }
 
