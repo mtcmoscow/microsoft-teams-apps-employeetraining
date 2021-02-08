@@ -14,6 +14,7 @@ microsoftTeams.initialize();
 microsoftTeams.getContext((context: microsoftTeams.Context) => {
     console.log(context.locale);
     i18n.changeLanguage(context.locale!);
+    moment.locale(context.locale!);
 });
 
 i18n
