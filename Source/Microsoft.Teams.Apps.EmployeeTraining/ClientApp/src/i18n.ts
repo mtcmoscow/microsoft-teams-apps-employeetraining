@@ -10,10 +10,10 @@ import 'moment/min/locales.min';
 import * as microsoftTeams from "@microsoft/teams-js";
 
 let locale = "en-US";
-microsoftTeams.initialize();
-microsoftTeams.getContext((context: microsoftTeams.Context) => {
-    i18n.changeLanguage(context.locale!);
-});
+//microsoftTeams.initialize();
+//microsoftTeams.getContext((context: microsoftTeams.Context) => {
+//    i18n.changeLanguage(context.locale!);
+//});
 
 i18n
 .use(Backend)
@@ -29,6 +29,15 @@ i18n
         useSuspense: true
     }
 });
+
+
+export const updateLocale = () => {
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const loc = params.get("locale") || locale;
+    i18n.changeLanguage(loc);
+    moment.locale(loc);
+};
 
 export const formatDate = (date: string) => {
     if (!date) return date;
