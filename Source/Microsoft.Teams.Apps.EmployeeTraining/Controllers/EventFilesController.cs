@@ -151,7 +151,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 }
 
                 var stream = new MemoryStream(csvData);
-                return new FileStreamResult(stream, "text/csv");
+                return new FileStreamResult(stream, "application/csv");
             }
             catch (Exception ex)
             {
