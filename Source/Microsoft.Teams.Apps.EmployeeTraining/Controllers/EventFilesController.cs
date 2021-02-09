@@ -152,11 +152,17 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 }
 
                 var stream = new MemoryStream();
-                var sw = new StreamWriter(stream, System.Text.Encoding.UTF8);
-                var data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке");
+                var writer = new StreamWriter(stream, System.Text.Encoding.UTF8);
+                var data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА");
                 var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
-                sw.Write(result);
-                sw.Flush();
+                writer.Write(result);
+                this.RecordEvent(writer.ToString(), new Dictionary<string, string>
+                {
+                    { "eventId", eventId },
+                    { "teamId", teamId },
+                });
+                writer.Flush();
+                stream.Position = 0;
 
                 return new FileStreamResult(stream, "text/csv");
             }
