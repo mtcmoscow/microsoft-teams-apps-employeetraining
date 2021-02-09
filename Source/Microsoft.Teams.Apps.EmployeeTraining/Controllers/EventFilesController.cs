@@ -154,8 +154,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 var stream = new MemoryStream();
                 var sw = new StreamWriter(stream, System.Text.Encoding.UTF8);
                 var data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке");
-                var result =  System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
-                //sw.Write("Это строка на русском языке");
+                var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
                 sw.Write(result);
                 sw.Flush();
 
