@@ -479,7 +479,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                 this.localizer.GetString("RegisteredUsers"),
             };
 
-            StringBuilder writer = new StringBuilder();
+            StringBuilder writer = new StringBuilder("\"");
 
             writer.Append(string.Join(",", csvColumns.Select(column => $"\"{column}\"").ToArray()));
             writer.AppendLine();
@@ -512,6 +512,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                     attendees.First(),
                 });
 
+                writer.Append(",\"");
                 writer.Append(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
                 writer.AppendLine();
 
