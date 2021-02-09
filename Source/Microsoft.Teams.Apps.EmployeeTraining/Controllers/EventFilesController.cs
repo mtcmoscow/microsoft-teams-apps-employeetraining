@@ -7,6 +7,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.ApplicationInsights;
     using Microsoft.AspNetCore.Authorization;
@@ -152,8 +153,10 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
 
                 var stream = new MemoryStream();
                 var sw = new StreamWriter(stream, System.Text.Encoding.UTF8);
-                var preamble = System.Text.Encoding.UTF8.GetPreamble();
-                sw.Write("Это строка на русском языке");
+                var data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке");
+                var result =  System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
+                //sw.Write("Это строка на русском языке");
+                sw.Write(result);
                 sw.Flush();
 
                 return new FileStreamResult(stream, "text/csv");
