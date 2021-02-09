@@ -7,7 +7,6 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.ApplicationInsights;
     using Microsoft.AspNetCore.Authorization;
@@ -151,11 +150,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                     return this.NoContent();
                 }
 
-                byte[] data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА");
-                var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
-
-                var stream = this.GenerateStreamFromString(string.Format(System.Globalization.CultureInfo.InvariantCulture, "\x00EF\x00BB\x00BF{0}", "Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА"));
-                return new FileStreamResult(stream, "text/csv;charset=utf-8");
+                return new FileStreamResult(csvData, "text/csv");
             }
             catch (Exception ex)
             {
@@ -167,16 +162,6 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 });
                 throw;
             }
-        }
-
-        private Stream GenerateStreamFromString(string s)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream,  System.Text.Encoding.UTF8);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
         }
     }
 }
