@@ -481,7 +481,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
             MemoryStream stream = new MemoryStream();
 
             StreamWriter writer = new StreamWriter(stream);
-            writer.Write(string.Join(",", csvColumns.Select(column => $"\"{column}\"").ToArray()));
+            writer.Write('"' + string.Join(",", csvColumns.Select(column => $"\"{column}\"").ToArray()));
             writer.WriteLine();
 
             var csvRows = new List<List<object>>();
