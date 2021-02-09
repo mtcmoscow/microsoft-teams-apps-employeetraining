@@ -5,9 +5,8 @@
 namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using System.IO;
+    using System.IO;    
     using System.Threading.Tasks;
     using Microsoft.ApplicationInsights;
     using Microsoft.AspNetCore.Authorization;
@@ -150,6 +149,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 {
                     return this.NoContent();
                 }
+
                 return new FileStreamResult(csvData, "text/csv");
             }
             catch (Exception ex)
@@ -162,6 +162,6 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 });
                 throw;
             }
-        }
+        }    
     }    
 }
