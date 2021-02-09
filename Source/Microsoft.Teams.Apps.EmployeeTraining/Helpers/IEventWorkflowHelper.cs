@@ -75,7 +75,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
         /// <param name="teamId">The LnD team Id</param>
         /// <param name="eventId">The event Id of which details needs to be exported</param>
         /// <returns>Returns CSV data in stream</returns>
-        Task<byte[]> ExportEventDetailsToCSVAsync(string teamId, string eventId);
+        Task<Stream> ExportEventDetailsToCSVAsync(string teamId, string eventId);
 
         /// <summary>
         /// Sends reminder to the registered users for an event

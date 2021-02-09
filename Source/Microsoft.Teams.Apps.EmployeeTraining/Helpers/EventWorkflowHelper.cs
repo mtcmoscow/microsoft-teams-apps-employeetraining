@@ -9,7 +9,6 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
     using System.Data;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Azure.Cosmos.Table;
@@ -454,7 +453,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
         /// <param name="teamId">The LnD team Id</param>
         /// <param name="eventId">The event Id of which details needs to be exported</param>
         /// <returns>Returns CSV data in stream</returns>
-        public async Task<byte[]> ExportEventDetailsToCSVAsync(string teamId, string eventId)
+        public async Task<Stream> ExportEventDetailsToCSVAsync(string teamId, string eventId)
         {
             var eventDetails = await this.eventRepository.GetEventDetailsAsync(eventId, teamId);
 
@@ -479,10 +478,11 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                 this.localizer.GetString("RegisteredUsers"),
             };
 
-            StringBuilder writer = new StringBuilder();
+            MemoryStream stream = new MemoryStream();
 
-            writer.Append(string.Join(",", csvColumns.Select(column => $"\"{column}\"").ToArray()));
-            writer.AppendLine();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(string.Join(",", csvColumns.Select(column => $"\"{column}\"").ToArray()));
+            writer.WriteLine();
 
             var csvRows = new List<List<object>>();
 
@@ -512,9 +512,8 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                     attendees.First(),
                 });
 
-                //writer.Append($",\"");
-                writer.Append(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
-                writer.AppendLine();
+                writer.Write(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
+                writer.WriteLine();
 
                 for (int i = 1; i < attendees.Count; i++)
                 {
@@ -532,8 +531,8 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                         attendees[i],
                     });
 
-                    writer.Append(string.Join(",", csvRows[i].Select(cellValue => $"\"{cellValue}\"")));
-                    writer.AppendLine();
+                    writer.Write(string.Join(",", csvRows[i].Select(cellValue => $"\"{cellValue}\"")));
+                    writer.WriteLine();
                 }
             }
             else
@@ -552,12 +551,13 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                     string.Empty,
                 });
 
-                writer.Append(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
+                writer.Write(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
             }
 
-            var data = Encoding.UTF8.GetBytes(writer.ToString());
-            var result = Encoding.UTF8.GetPreamble().Concat(data).ToArray();
-            return result;
+            writer.Flush();
+            stream.Position = 0;
+
+            return stream;
         }
 
         /// <summary>
