@@ -172,7 +172,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
         private Stream GenerateStreamFromString(string s)
         {
             var stream = new MemoryStream();
-            var writer = new StreamWriter(stream,  System.Text.Encoding.UTF8);
+            var writer = new StreamWriter(stream,  new System.Text.UTF8Encoding(true));
             writer.Write(s);
             writer.Flush();
             stream.Position = 0;
