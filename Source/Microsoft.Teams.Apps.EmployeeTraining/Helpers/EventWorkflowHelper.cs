@@ -556,7 +556,6 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
 
             var data = Encoding.UTF8.GetBytes(writer.ToString());
             var result = Encoding.UTF8.GetPreamble().Concat(data).ToArray();
-
             return result;
         }
 
