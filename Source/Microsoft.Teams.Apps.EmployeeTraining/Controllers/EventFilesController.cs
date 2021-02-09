@@ -6,7 +6,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;    
+    using System.IO;
     using System.Threading.Tasks;
     using Microsoft.ApplicationInsights;
     using Microsoft.AspNetCore.Authorization;
@@ -162,6 +162,6 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 });
                 throw;
             }
-        }    
-    }    
+        }
+    }
 }
