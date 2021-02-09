@@ -150,13 +150,6 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 {
                     return this.NoContent();
                 }
-                
-                //var data = System.Text.Encoding.UTF8.GetBytes("Это строка,еще одна строка");
-                //var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
-                //var stream = new MemoryStream(result);
-
-                
-
                 return new FileStreamResult(csvData, "text/csv");
             }
             catch (Exception ex)
@@ -170,19 +163,5 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 throw;
             }
         }
-    }
-
-    public static class StreamExtensions
-    {
-        public static byte[] ToBytes(this string value, System.Text.Encoding encoding)
-        {
-            using (var stream = new MemoryStream())
-            using (var sw = new StreamWriter(stream, encoding))
-            {
-                sw.Write(value);
-                sw.Flush();
-                return stream.ToArray();
-            }
-        }
-    }
+    }    
 }
