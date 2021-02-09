@@ -8,7 +8,7 @@ description: Employee Training app promotes users to participate in various lear
 urlFragment: microsoft-teams-apps-employeetraining
 ---
 
-## Employee Training App Template
+## Employee Training App Template rus
 
 | [Documentation](https://github.com/OfficeDev/microsoft-teams-apps-employeetraining/wiki) | [Deployment guide](https://github.com/OfficeDev/microsoft-teams-apps-employeetraining/wiki/Deployment-Guide) | [Architecture](https://github.com/OfficeDev/microsoft-teams-apps-employeetraining/wiki/Solution-Overview) |
 | ---- | ---- | ---- |
