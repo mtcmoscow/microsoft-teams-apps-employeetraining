@@ -151,10 +151,10 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                     return this.NoContent();
                 }
 
-                byte[] data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА");
+                byte[] data = System.Text.Encoding.UTF8.GetBytes(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}", "Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА"));
                 var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
 
-                var stream = this.GenerateStreamFromString("Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА");
+                var stream = this.GenerateStreamFromString(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}", "Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА"));
                 return new FileStreamResult(stream, "text/csv");
             }
             catch (Exception ex)
