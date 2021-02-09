@@ -157,7 +157,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
 
                 
 
-                return new FileStreamResult("Это строка,еще одна строка".ToBytes(System.Text.Encoding.UTF8), "text/csv");
+                return new FileStreamResult(csvData, "text/csv");
             }
             catch (Exception ex)
             {
