@@ -150,8 +150,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 {
                     return this.NoContent();
                 }
-                
-                var data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА");
+                byte[] data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА");
                 var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
                 var stream = new MemoryStream(result);
                 return new FileStreamResult(stream, "text/csv");
