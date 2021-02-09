@@ -99,6 +99,16 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
             }
         }
 
+        public static Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream,  System.Text.Encoding.UTF8);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+
         /// <summary>
         /// Handles request to export event details to CSV
         /// </summary>
@@ -153,8 +163,8 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
 
                 byte[] data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА");
                 var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
-                var stream = new MemoryStream(result);
-                stream.Position = 0;
+
+                var stream = GenerateStreamFromString("Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА");
                 return new FileStreamResult(stream, "text/csv");
             }
             catch (Exception ex)
