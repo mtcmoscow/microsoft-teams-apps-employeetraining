@@ -151,11 +151,13 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                     return this.NoContent();
                 }
                 
-                var data = System.Text.Encoding.UTF8.GetBytes("Это строка,еще одна строка");
-                var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
-                var stream = new MemoryStream(result);
+                //var data = System.Text.Encoding.UTF8.GetBytes("Это строка,еще одна строка");
+                //var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
+                //var stream = new MemoryStream(result);
 
-                return new FileStreamResult(stream, "text/csv");
+                
+
+                return new FileStreamResult("Это строка,еще одна строка".ToBytes(System.Text.Encoding.UTF8), "text/csv");
             }
             catch (Exception ex)
             {
@@ -166,6 +168,20 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                     { "teamId", teamId },
                 });
                 throw;
+            }
+        }
+    }
+
+    public static class StreamExtensions
+    {
+        public static byte[] ToBytes(this string value, System.Text.Encoding encoding)
+        {
+            using (var stream = new MemoryStream())
+            using (var sw = new StreamWriter(stream, encoding))
+            {
+                sw.Write(value);
+                sw.Flush();
+                return stream.ToArray();
             }
         }
     }
