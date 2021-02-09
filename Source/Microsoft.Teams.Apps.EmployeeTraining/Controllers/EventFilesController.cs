@@ -150,20 +150,10 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 {
                     return this.NoContent();
                 }
-
-                var stream = new MemoryStream();
-                var writer = new StreamWriter(stream, System.Text.Encoding.UTF8);
+                
                 var data = System.Text.Encoding.UTF8.GetBytes("Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА");
                 var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
-                writer.Write(result);
-                this.RecordEvent(writer.ToString(), new Dictionary<string, string>
-                {
-                    { "eventId", eventId },
-                    { "teamId", teamId },
-                });
-                writer.Flush();
-                stream.Position = 0;
-
+                var stream = new MemoryStream(result);
                 return new FileStreamResult(stream, "text/csv");
             }
             catch (Exception ex)
