@@ -154,7 +154,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Controllers
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}", "Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА"));
                 var result = System.Text.Encoding.UTF8.GetPreamble().Concat(data).ToArray();
 
-                var stream = this.GenerateStreamFromString(string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}", "Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА"));
+                var stream = this.GenerateStreamFromString(string.Format(System.Globalization.CultureInfo.InvariantCulture, "\x00EF\x00BB\x00BF{0}", "Это строка на русском языке,ЭТО ВТОРАЯ СТРОКА"));
                 return new FileStreamResult(stream, "text/csv;charset=utf-8");
             }
             catch (Exception ex)
