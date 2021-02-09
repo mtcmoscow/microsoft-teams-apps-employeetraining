@@ -479,9 +479,9 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
             };
 
             MemoryStream stream = new MemoryStream();
-
+            stream.Position = 0;
             StreamWriter writer = new StreamWriter(stream, System.Text.Encoding.UTF8);
-            writer.Write('"' + string.Join(",", csvColumns.Select(column => $"\"{column}\"").ToArray()));
+            writer.Write(string.Join(",", csvColumns.ToArray()));
             writer.WriteLine();
 
             var csvRows = new List<List<object>>();
@@ -512,7 +512,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                     attendees.First(),
                 });
 
-                writer.Write(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
+                writer.Write(string.Join(",", csvRows.First().Select(cellValue => $"{cellValue}")));
                 writer.WriteLine();
 
                 for (int i = 1; i < attendees.Count; i++)
@@ -531,7 +531,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                         attendees[i],
                     });
 
-                    writer.Write(string.Join(",", csvRows[i].Select(cellValue => $"\"{cellValue}\"")));
+                    writer.Write(string.Join(",", csvRows[i].Select(cellValue => $"{cellValue}")));
                     writer.WriteLine();
                 }
             }
@@ -551,7 +551,7 @@ namespace Microsoft.Teams.Apps.EmployeeTraining.Helpers
                     string.Empty,
                 });
 
-                writer.Write(string.Join(",", csvRows.First().Select(cellValue => $"\"{cellValue}\"")));
+                writer.Write(string.Join(",", csvRows.First().Select(cellValue => $"{cellValue}")));
             }
 
             writer.Flush();
