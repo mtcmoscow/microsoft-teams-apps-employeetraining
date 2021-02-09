@@ -43,15 +43,15 @@
   <!-- StyleCop.Analyzers: https://github.com/DotNetAnalyzers/StyleCopAnalyzers/tree/master/documentation -->
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
     <Rule Id="SA0001" Action="None"  />
-    <Rule Id="SA1011" Action="Error" /> 
-    <Rule Id="SA1012" Action="Error" /> 
-    <Rule Id="SA1013" Action="Error" /> 
-    <Rule Id="SA1014" Action="Error" /> 
+    <Rule Id="SA1011" Action="Error" />
+    <Rule Id="SA1012" Action="Error" />
+    <Rule Id="SA1013" Action="Error" />
+    <Rule Id="SA1014" Action="Error" />
     <Rule Id="SA1015" Action="Error" />
     <Rule Id="SA1016" Action="Error" />
     <Rule Id="SA1017" Action="Error" />
     <Rule Id="SA1018" Action="Error" />
-    <Rule Id="SA1019" Action="Error" /> 
+    <Rule Id="SA1019" Action="Error" />
     <Rule Id="SA0002" Action="Error" />
     <Rule Id="SA1000" Action="Error" />
     <Rule Id="SA1001" Action="Error" />
@@ -72,7 +72,7 @@
     <Rule Id="SA1025" Action="Error" />
     <Rule Id="SA1026" Action="Error" />
     <Rule Id="SA1027" Action="Error" />
-    <Rule Id="SA1028" Action="Error" />
+    <Rule Id="SA1028" Action="Warning" />
     <Rule Id="SA1100" Action="Error" />
     <Rule Id="SA1101" Action="Error" />
     <Rule Id="SA1102" Action="Error" />
