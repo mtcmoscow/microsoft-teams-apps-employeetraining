@@ -21,7 +21,6 @@ interface IDateePickerProps {
     onDateSelect: (startDate: Date) => void,
     theme: string,
     screenWidth: number,
-    locale?: string;
     minDate: Date;
     disableSelectionForPastDate:boolean
 }
@@ -40,10 +39,6 @@ const StartDate: React.FC<IDateePickerProps> = props => {
     let bgcolor = "";
     let theme = props.theme;
     let datePickerTheme;
-
-    //initializeDate();
-    // Date for Sunday in Jan month
-    let date: Date = new Date("1970-01-04T00:00");
 
     dayPickerStrings.months = moment.months();
     dayPickerStrings.shortMonths = moment.monthsShort();
@@ -98,6 +93,7 @@ const StartDate: React.FC<IDateePickerProps> = props => {
                                 className={bgcolor}
                                 label={''}
                                 strings={dayPickerStrings}
+                                formatDate={(date: Date): string=>{return (moment(date).toLocaleString())}}
                                 showMonthPickerAsOverlay={true}
                                 minDate={minDate!}
                                 isMonthPickerVisible={true}
