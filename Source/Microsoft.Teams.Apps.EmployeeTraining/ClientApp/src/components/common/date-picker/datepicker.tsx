@@ -36,7 +36,8 @@ let dayPickerStrings = {
 };
 
 const onFormatDate = (date?: Date): string => {
-    return !date ? '' : moment(date).toLocaleString();
+    console.log(moment.locale());
+    return !date ? '' : moment(date).format("LL");
 };
 
 const StartDate: React.FC<IDateePickerProps> = props => {
