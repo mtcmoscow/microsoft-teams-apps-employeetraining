@@ -25,7 +25,7 @@ interface IDateePickerProps {
     disableSelectionForPastDate:boolean
 }
 
-const DayPickerStrings: IDatePickerStrings = {
+let dayPickerStrings: IDatePickerStrings = {
     months: [
       'Январь',
       'Февраль',
@@ -40,13 +40,13 @@ const DayPickerStrings: IDatePickerStrings = {
       'Ноябрь',
       'Декабрь',
     ],
-  
+
     shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  
+
     days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-  
+
     shortDays: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-  
+
     goToToday: 'Сегодня',
     prevMonthAriaLabel: 'Предыдущий месяц',
     nextMonthAriaLabel: 'Следующий месяц',
@@ -61,6 +61,23 @@ const StartDate: React.FC<IDateePickerProps> = props => {
     let bgcolor = "";
     let theme = props.theme;
     let datePickerTheme;
+
+    //initializeDate();
+    // Date for Sunday in Jan month
+    let date: Date = new Date("1970-01-04T00:00");
+    let locale: string = "ru-RU";/*props.locale;*/
+
+    for (let i = 0; i < 7; i++) {
+        dayPickerStrings.days[i] = date.toLocaleDateString(locale, { weekday: "long" });
+        dayPickerStrings.shortDays[i] = date.toLocaleDateString(locale, { weekday: "narrow" });
+        date.setDate(date.getDate() + 1);
+    }
+
+    for (let i = 0; i < 12; i++) {
+        dayPickerStrings.months[i] = date.toLocaleDateString(locale, { month: "long" });
+        dayPickerStrings.shortMonths[i] = date.toLocaleDateString(locale, { month: "short" });
+        date.setMonth(date.getMonth() + 1);
+    }
 
     if (theme === Constants.dark) {
         bgcolor = "dark-datepicker";
@@ -108,7 +125,7 @@ const StartDate: React.FC<IDateePickerProps> = props => {
                             <DatePicker
                                 className={bgcolor}
                                 label={''}
-                                strings={DayPickerStrings}
+                                strings={dayPickerStrings}
                                 showMonthPickerAsOverlay={true}
                                 minDate={minDate!}
                                 isMonthPickerVisible={true}
