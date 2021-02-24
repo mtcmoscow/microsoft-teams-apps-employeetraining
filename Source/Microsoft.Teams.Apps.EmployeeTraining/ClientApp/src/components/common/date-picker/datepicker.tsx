@@ -21,41 +21,20 @@ interface IDateePickerProps {
     onDateSelect: (startDate: Date) => void,
     theme: string,
     screenWidth: number,
+    locale?: string;
     minDate: Date;
     disableSelectionForPastDate:boolean
 }
 
-let dayPickerStrings: IDatePickerStrings = {
-    months: [
-      'Январь',
-      'Февраль',
-      'Март',
-      'Апрель',
-      'Май',
-      'Июнь',
-      'Июль',
-      'Август',
-      'Сентябрь',
-      'Октябрь',
-      'Ноябрь',
-      'Декабрь',
-    ],
-
-    shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-
-    days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-
-    shortDays: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-
-    goToToday: 'Сегодня',
-    prevMonthAriaLabel: 'Предыдущий месяц',
-    nextMonthAriaLabel: 'Следующий месяц',
-    prevYearAriaLabel: 'Предыдущий год',
-    nextYearAriaLabel: 'Следующий год',
-    closeButtonAriaLabel: 'Закрыть',
-    monthPickerHeaderAriaLabel: '{0}, выберите для смены года',
-    yearPickerHeaderAriaLabel: '{0}, выберите для смены месяца',
-  };
+let dayPickerStrings = {
+    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    shortDays: ["S", "M", "T", "W", "T", "F", "S"],
+    prevMonthAriaLabel: "Previous month",
+    nextMonthAriaLabel: "Next month",
+    goToToday: ""
+};
 
 const StartDate: React.FC<IDateePickerProps> = props => {
     let bgcolor = "";
@@ -65,19 +44,12 @@ const StartDate: React.FC<IDateePickerProps> = props => {
     //initializeDate();
     // Date for Sunday in Jan month
     let date: Date = new Date("1970-01-04T00:00");
-    let locale: string = "ru-RU";/*props.locale;*/
 
-    for (let i = 0; i < 7; i++) {
-        dayPickerStrings.days[i] = date.toLocaleDateString(locale, { weekday: "long" });
-        dayPickerStrings.shortDays[i] = date.toLocaleDateString(locale, { weekday: "narrow" });
-        date.setDate(date.getDate() + 1);
-    }
+    dayPickerStrings.months = moment.months();
+    dayPickerStrings.shortMonths = moment.monthsShort();
+    dayPickerStrings.days = moment.weekdays();
+    dayPickerStrings.shortDays = moment.weekdaysShort();
 
-    for (let i = 0; i < 12; i++) {
-        dayPickerStrings.months[i] = date.toLocaleDateString(locale, { month: "long" });
-        dayPickerStrings.shortMonths[i] = date.toLocaleDateString(locale, { month: "short" });
-        date.setMonth(date.getMonth() + 1);
-    }
 
     if (theme === Constants.dark) {
         bgcolor = "dark-datepicker";
