@@ -3,7 +3,6 @@
 // </copyright>
 
 import * as React from "react";
-import moment from "moment";
 import { Flex } from '@fluentui/react-northstar';
 import { useState } from "react";
 import { DatePicker } from 'office-ui-fabric-react/lib/DatePicker';
@@ -12,6 +11,8 @@ import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 import { DarkCustomizations } from "../../../helpers/dark-customizations";
 import { DefaultCustomizations } from "../../../helpers/default-customizations";
 import Constants from "../../../constants/resources";
+import moment from "moment";
+import 'moment/min/locales.min';
 import "./date-picker.css";
 
 initializeIcons();
@@ -37,7 +38,7 @@ let dayPickerStrings = {
 
 const onFormatDate = (date?: Date): string => {
     console.log(moment.locale());
-    return !date ? '' : moment(date).format("LL");
+    return !date ? '' : moment.utc(date).local().format("LL");
 };
 
 const StartDate: React.FC<IDateePickerProps> = props => {
