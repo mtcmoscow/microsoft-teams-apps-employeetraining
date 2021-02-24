@@ -35,6 +35,10 @@ let dayPickerStrings = {
     goToToday: ""
 };
 
+const onFormatDate = (date?: Date): string => {
+    return !date ? '' : moment(date).toLocaleString();
+};
+
 const StartDate: React.FC<IDateePickerProps> = props => {
     let bgcolor = "";
     let theme = props.theme;
@@ -93,7 +97,7 @@ const StartDate: React.FC<IDateePickerProps> = props => {
                                 className={bgcolor}
                                 label={''}
                                 strings={dayPickerStrings}
-                                formatDate={(date: Date): string=>{return (moment(date).toLocaleString())}}
+                                formatDate={onFormatDate}
                                 showMonthPickerAsOverlay={true}
                                 minDate={minDate!}
                                 isMonthPickerVisible={true}
