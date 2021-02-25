@@ -27,15 +27,14 @@ interface IDateePickerProps {
 }
 
 let dayPickerStrings = {
-    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-    shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    shortDays: ["S", "M", "T", "W", "T", "F", "S"],
+    months: moment.months(),
+    shortMonths: moment.monthsShort(),
+    days: moment.weekdays(),
+    shortDays: moment.weekdaysShort(),
     goToToday: ""
 };
 
 const onFormatDate = (date?: Date): string => {
-    console.log(moment.locale());
     return !date ? '' : moment.utc(date).local().format("LL");
 };
 
@@ -43,12 +42,6 @@ const StartDate: React.FC<IDateePickerProps> = props => {
     let bgcolor = "";
     let theme = props.theme;
     let datePickerTheme;
-
-    dayPickerStrings.months = moment.months();
-    dayPickerStrings.shortMonths = moment.monthsShort();
-    dayPickerStrings.days = moment.weekdays();
-    dayPickerStrings.shortDays = moment.weekdaysShort();
-
 
     if (theme === Constants.dark) {
         bgcolor = "dark-datepicker";
