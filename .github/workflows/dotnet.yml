@@ -20,6 +20,4 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore 'Source/Microsoft.Teams.Apps.EmployeeTraining.sln'
     - name: Build
-      run: dotnet build 'Source/Microsoft.Teams.Apps.EmployeeTraining.sln' --no-restore
-    - name: Test
-      run: dotnet test 'Source/Microsoft.Teams.Apps.EmployeeTraining.sln' --no-build --verbosity normal
+      run: dotnet build 'Source/Microsoft.Teams.Apps.EmployeeTraining.sln' --no-restore    
