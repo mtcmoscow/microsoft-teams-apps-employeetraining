@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore 'Source/Microsoft.Teams.Apps.EmployeeTraining.sln'
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build 'Source/Microsoft.Teams.Apps.EmployeeTraining.sln' --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test 'Source/Microsoft.Teams.Apps.EmployeeTraining.sln' --no-build --verbosity normal
